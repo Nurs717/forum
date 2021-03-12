@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/mazhaboy/forum/tree/master/view"
+	"forum/view"
+
 	"golang.org/x/crypto/bcrypt"
 )
 

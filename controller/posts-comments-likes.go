@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mazhaboy/forum/tree/master/model"
-	"github.com/mazhaboy/forum/tree/master/view"
+	"forum/model"
+	"forum/view"
 )
 
 //Flag flag

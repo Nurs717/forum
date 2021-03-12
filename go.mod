@@ -1,4 +1,4 @@
-module github.com/mazhaboy/forum/tree/master
+module forum
 
 go 1.15
 

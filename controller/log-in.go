@@ -8,7 +8,7 @@ import (
 
 	uuid "github.com/satori/go.uuid"
 
-	"github.com/mazhaboy/forum/tree/master/model"
+	"forum/model"
 )
 
 func login() http.HandlerFunc {
@@ -36,7 +36,7 @@ func login() http.HandlerFunc {
 				if err == nil {
 					http.Redirect(w, r, "/posts", 302)
 
-					fmt.Println("est uzhe")
+					fmt.Println("exist")
 				}
 
 				if err != nil {
@@ -60,9 +60,7 @@ func login() http.HandlerFunc {
 							log.Fatal(err)
 						}
 					}
-
-					fmt.Println("trueeee")
-					fmt.Println("net no ya dobavil")
+					fmt.Println("new user set")
 					http.Redirect(w, r, "/posts", 302)
 				}
 
