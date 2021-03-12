@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>  
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Forum</title>
+<style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    }
+
+    .filterwrap{
+        
+        display: flex;
+        justify-content: flex-end;
+        width:100%;
+        height: 50px;
+        border:5px solid white;
+        background-color:  rgb(43, 145, 97);
+        border-radius: 10px;
+    }
+    .filter{
+       
+        margin:5px;
+        
+    }
+    .btn {
+    
+    border-radius: 25px;
+    margin: 1rem 0;
+    
+    outline: none;
+    border:white 2px solid;
+    background-image: linear-gradient(to right,  rgb(43, 145, 97), rgb(43, 145, 97),  rgb(43, 145, 97));
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family:'Poppins', sans-serif ;
+    background-size: 100%;
+    transition: 0.5s;
+    color: white;
+    }
+    .option{
+    border-radius: 25px;
+    margin: 1rem 0;
+    
+    outline: none;
+    border :white 2px solid;
+    background-image: linear-gradient(to right,  rgb(43, 145, 97), rgb(43, 145, 97),  rgb(43, 145, 97));
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family:'Poppins', sans-serif ;
+    background-size: 100%;
+    transition: 0.5s;
+    color: white;
+    }
+    .post-wrap {
+        margin: auto;
+        border: 1px solid  rgb(43, 145, 97);
+        border-radius: 10px;
+        width: 80%;
+        padding: 10px;
+        
+    }
+    .top {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 10px;
+        margin: 17px;
+        padding: 10px;
+    
+        outline: none;
+         border:white 2px solid;
+         background-image: linear-gradient(to right,  rgb(43, 145, 97), rgb(43, 145, 97),  rgb(43, 145, 97));
+         cursor: pointer;
+    
+        font-family:'Poppins', sans-serif ;
+        background-size: 200%;
+         transition: 0.5s;
+         color: white;
+
+    }
+    .UserName {
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .row {
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .body {
+        margin: 20px;
+        padding: 5px;
+        border-bottom: 2px solid teal;
+        border-top: 2px solid teal;
+    }
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .time {
+    outline: none;
+    border :white 2px solid;
+    background-image: linear-gradient(to right,  rgb(43, 145, 97), rgb(43, 145, 97),  rgb(43, 145, 97));
+    cursor: pointer;
+    font-family:'Poppins', sans-serif ;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
+    }
+
+    .comment {
+        
+        justify-content: flex-start;
+        margin: 20px;
+        padding: 5px;
+        border: 2px solid teal;
+        border-radius: 10px; 
+    }
+    .commentbody{
+        margin: 10px;
+        
+    }
+    .UserNamee {
+    margin: 10px;
+    color: teal;
+    }
+    .btnpost{
+    border-radius: 10px;
+    
+    padding: 10px;
+    
+    outline: none;
+    border:white 2px solid;
+    background-image: linear-gradient(to right,  rgb(43, 145, 97), rgb(43, 145, 97),  rgb(43, 145, 97));
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family:'Poppins', sans-serif ;
+    background-size: 100%;
+    transition: 0.5s;
+    color: white;
+    }
+    .CP {
+        padding-left: 20px;
+    }
+    .LP {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .posts {
+        margin: auto;
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+    }
+    .btnpostt {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+
+    
+
+</style>
+</head>    
+<body>
+
+<div class="filterwrap">
+<div class="filter">
+    <form method="GET" >
+    <button type="submit" class="btn" value="resetfilter" name="resetfilter">reset filter</button>
+    </form>
+</div>
+<div class="filter">
+    <form method="POST">
+       
+        <select class="option" name="filter">
+        
+        <option value="sport">sport</option>
+        <option value="religion">religion</option>
+        <option value="politics">politics</option>
+        <option value="science">science</option>
+        <option value="others">others</option>
+        
+        </select>
+    
+    <button type="submit" class="btn">filter</button>
+    </form>
+</div>
+
+<div class="filter">
+    <form method="GET" >
+   <button type="submit" class="btn" value="login" name="login">login</button>
+   </form>
+ </div>
+</div>
+    {{range .}}
+
+    <div class="post-wrap">
+        <div>
+        <div class="top">    
+        <div class="UserName">{{.UserName}}</div>
+        <div class="row">
+            <div class="category"> {{.Category}}</div>
+        </div>
+       
+        </div>
+
+        <div class="body">
+            <p>
+            {{.PostBody}}
+            </p>
+        </div>  
+
+        <div class="bottom">
+            <div class="time">
+            <span>{{.PostDate}} {{.PostTime}}</span>
+            </div>
+            <div class="like">
+            <i class="fa fa-thumbs-up"> {{.LikeCounts}}</i>
+            </div>  
+        </div>
+    
+
+        
+        {{range .Comments}}
+        <div class="comment">
+        
+        <input type="hidden" name="CommentID" value="{{.CommentID}}"></input> 
+        <div class="UserNamee">{{.UserName}}</div>
+        <div class="commentbody">
+            <div>
+            <p>
+                {{.CommentBody}}
+            </p> 
+            </div>
+             
+        
+        <div><i class="fa fa-thumbs-up"> {{.LikeCounts}}</i></div>
+        </div>
+       
+        </div>
+
+        {{end}}
+    
+    
+        
+        </div>
+    
+    </div> 
+</div>
+
+    {{end}}
+
+</body>
+</html> 
