@@ -12,8 +12,8 @@ RUN go mod download
 
 COPY . .
 
-EXPOSE 8282
+EXPOSE 8080
 
 RUN go build
 
-CMD ["./master"]    
+CMD ["./master"]  
