@@ -70,7 +70,7 @@ func IsUserValid(Session string) bool {
 func GetPosts(filter string, UserID int) []view.Post {
 	var post string
 
-	rows, err := con.Query("select t1.*, count(t2.UserID) as LikeCount from Comment t1 left join LikeComment t2 USING(CommentID) group by t1.CommentID")
+	rows, err := con.Query("select t1.*, count(t2.User_ID) as LikeCount from Comment t1 left join Like_Comment t2 USING(Comment_ID) group by t1.Comment_ID")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -88,21 +88,21 @@ func GetPosts(filter string, UserID int) []view.Post {
 	fmt.Println("1")
 
 	if filter == "sport" {
-		post = "select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t1.Categories='sport' group by t1.PostID order by PostID DESC"
+		post = "select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t1.Categories='sport' group by t1.Post_ID order by Post_ID DESC"
 	} else if filter == "religion" {
-		post = "select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t1.Categories='religion' group by t1.PostID order by PostID DESC"
+		post = "select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t1.Categories='religion' group by t1.Post_ID order by Post_ID DESC"
 	} else if filter == "politics" {
-		post = "select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t1.Categories='politics' group by t1.PostID order by PostID DESC"
+		post = "select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t1.Categories='politics' group by t1.Post_ID order by Post_ID DESC"
 	} else if filter == "science" {
-		post = "select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t1.Categories='science' group by t1.PostID order by PostID DESC"
+		post = "select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t1.Categories='science' group by t1.Post_ID order by Post_ID DESC"
 	} else if filter == "others" {
-		post = "select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t1.Categories='others' group by t1.PostID order by PostID DESC"
+		post = "select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t1.Categories='others' group by t1.Post_ID order by Post_ID DESC"
 	} else {
-		post = "select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) group by t1.PostID order by PostID DESC"
+		post = "select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) group by t1.Post_ID order by Post_ID DESC"
 	}
 	if filter == "myposts" {
 		fmt.Println("myposts filter", UserID)
-		rows, err := con.Query("select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t1.UserID=? group by t1.PostID order by PostID DESC", UserID)
+		rows, err := con.Query("select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t1.User_ID=? group by t1.Post_ID order by Post_ID DESC", UserID)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -135,7 +135,7 @@ func GetPosts(filter string, UserID int) []view.Post {
 	}
 	if filter == "myfavourite" {
 		fmt.Println("myfavourite filter", UserID)
-		rows, err := con.Query("select t1.*, count(t2.UserID) from Post t1 left join Like t2 USING(PostID) where t2.UserID=? group by t1.PostID order by PostID DESC", UserID)
+		rows, err := con.Query("select t1.*, count(t2.User_ID) from Post t1 left join Like t2 USING(Post_ID) where t2.User_ID=? group by t1.Post_ID order by Post_ID DESC", UserID)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -282,7 +282,7 @@ func IsLiked(UserID int, PostID int) bool {
 
 	for _, s := range Users {
 		if s.UserID == UserID && s.PostID == PostID {
-			_, err := con.Exec("delete from Like where UserID=? and PostID=?", UserID, PostID)
+			_, err := con.Exec("delete from Like where User_ID=? and Post_ID=?", UserID, PostID)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -296,7 +296,7 @@ func IsLiked(UserID int, PostID int) bool {
 // IsCommentLiked checks is comment liked
 func IsCommentLiked(CommentID int, UserID int) bool {
 
-	rows, err := con.Query("select * from LikeComment")
+	rows, err := con.Query("select * from Like_Comment")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -316,7 +316,7 @@ func IsCommentLiked(CommentID int, UserID int) bool {
 
 	for _, s := range Users {
 		if s.UserID == UserID && s.CommentID == CommentID {
-			_, err := con.Exec("delete from LikeComment where UserID=? and CommentID=?", UserID, CommentID)
+			_, err := con.Exec("delete from Like_Comment where User_ID=? and Comment_ID=?", UserID, CommentID)
 			if err != nil {
 				log.Fatal(err)
 			}

@@ -113,8 +113,6 @@ func postsandlikes() http.HandlerFunc {
 				}
 			}
 
-			// logo := []view.User{}
-
 			myposts = r.FormValue("myposts")
 			fmt.Println("This mypost:", myposts)
 			if myposts != "" {

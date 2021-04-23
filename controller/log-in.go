@@ -35,7 +35,6 @@ func login() http.HandlerFunc {
 				cookie, err := r.Cookie("session")
 				if err == nil {
 					http.Redirect(w, r, "/posts", 302)
-
 					fmt.Println("exist")
 				}
 

@@ -1,6 +1,8 @@
 package controller
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // Register reg
 func Register() *http.ServeMux {

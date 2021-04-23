@@ -7,13 +7,13 @@ import (
 // UpdateSession update session
 func UpdateSession(NewSessionID, Email string) error {
 
-	_, err := con.Exec("update Session set SessionID=? where Email=?", NewSessionID, Email)
+	_, err := con.Exec("update Session set Session_Cookie=? where Email=?", NewSessionID, Email)
 	if err != nil {
 		return err
 	}
 	fmt.Println(Email)
 	fmt.Println(NewSessionID)
-	fmt.Println("ExpiredSessionID is updated")
+	fmt.Println("SessionID is updated")
 	return nil
 
 }
@@ -21,7 +21,7 @@ func UpdateSession(NewSessionID, Email string) error {
 // UpdateLike update Like
 func UpdateLike(Likes int, PostID string) error {
 
-	_, err := con.Exec("update pl set Like=? where PostID=?", Likes, PostID)
+	_, err := con.Exec("update pl set Like=? where Post_ID=?", Likes, PostID)
 	if err != nil {
 		return err
 	}

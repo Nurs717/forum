@@ -12,7 +12,7 @@ func Insert(a, b, c string) error {
 
 	hashed, _ := bcrypt.GenerateFromPassword([]byte(c), bcrypt.DefaultCost)
 	password := string(hashed)
-	_, err := con.Exec("INSERT INTO User (Email,UserName,Password) VALUES(?,?,?)", b, a, password)
+	_, err := con.Exec("INSERT INTO User (Email,User_Name,Password) VALUES(?,?,?)", b, a, password)
 	if err != nil {
 		return err
 	}
@@ -24,9 +24,9 @@ func Insert(a, b, c string) error {
 // AddSession adding session
 func AddSession(a, b string) error {
 
-	_, err := con.Exec("INSERT INTO Session (Email,SessionID) VALUES(?,?)", a, b)
+	_, err := con.Exec("INSERT INTO Session (Email,Session_Cookie) VALUES(?,?)", a, b)
 	if err != nil {
-		fmt.Println("Errrrrrrrrr")
+		fmt.Println("Err, add session exist")
 		return err
 	}
 	fmt.Println("Data is inserted, add session")
@@ -43,7 +43,7 @@ func AddPost(a int, b string, UserName string, category string) error {
 	date := T[0:11]
 	time := T[11:]
 	fmt.Println(t.Format("2006-01-02 15:04:05"))
-	_, err := con.Exec("INSERT INTO Post (UserID, PostBody, PostDate, PostTime, UserName, Categories) VALUES(?,?,?,?,?,?)", a, b, date, time, UserName, category)
+	_, err := con.Exec("INSERT INTO Post (User_ID, Post_Body, Post_Date, Post_Time, User_Name, Categories) VALUES(?,?,?,?,?,?)", a, b, date, time, UserName, category)
 	if err != nil {
 		fmt.Println("Error AddPost")
 		return err
@@ -56,7 +56,7 @@ func AddPost(a int, b string, UserName string, category string) error {
 // AddLike adding like
 func AddLike(a int, b int) error {
 
-	_, err := con.Exec("INSERT INTO Like (UserID, PostID) VALUES(?,?)", a, b)
+	_, err := con.Exec("INSERT INTO Like (User_ID, Post_ID) VALUES(?,?)", a, b)
 	if err != nil {
 		fmt.Println("Error insert like post")
 		return err
@@ -69,7 +69,7 @@ func AddLike(a int, b int) error {
 // AddCommentLike adding comment like
 func AddCommentLike(a int, b int) error {
 
-	_, err := con.Exec("INSERT INTO LikeComment (CommentID, UserID) VALUES(?,?)", a, b)
+	_, err := con.Exec("INSERT INTO Like_Comment (Comment_ID, User_ID) VALUES(?,?)", a, b)
 	if err != nil {
 		fmt.Println("Error Add comment like")
 		return err
@@ -81,7 +81,7 @@ func AddCommentLike(a int, b int) error {
 
 // AddComment adding comment
 func AddComment(a int, b int, comment string, UserName string) error {
-	_, err := con.Exec("INSERT INTO Comment (UserID, PostID, Comment, UserName) VALUES(?,?,?,?)", a, b, comment, UserName)
+	_, err := con.Exec("INSERT INTO Comment (User_ID, Post_ID, Comment, User_Name) VALUES(?,?,?,?)", a, b, comment, UserName)
 	if err != nil {
 		fmt.Println("Error add comment")
 		return err
